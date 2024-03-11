@@ -1,0 +1,40 @@
+/* movie.css */
+#thumbnail-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%; /* 幅を変更 */
+  max-height: 80vh; /* 画面の高さいっぱいまで表示 */
+}
+
+.thumbnail {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+#video-container-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* 背景色（黒色）と透明度 */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* 動画プレイヤーが最前面に表示されるように */
+}
+
+#video-container {
+  width: 90%;
+  max-width: 600px; /* 例として適切な横幅を設定 */
+  height: 60%;
+  z-index: 1000;
+}
+
+#video-player {
+  width: 100%;
+  height: 100%;
+}
