@@ -1,1 +1,4 @@
-# homepage
+# Fantastic Records
+Fantastic RecordsのホームページではTemplate Party様のテンプレートを使用して作成しています。
+また、サイトの表示速度高速化ため次世代画像フォーマットのWebpを使用しています。
+そして、サイトをインターネット上に公開するために「GitHub Pages」を使用しています。
