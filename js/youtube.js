@@ -1,4 +1,5 @@
-import { apiKey, channelId } from './config.js';
+const apiKey = process.env.YOUTUBE_API_KEY;
+const channelId = process.env.YOUTUBE_CHANNEL_ID;
 
 const manualVideoIds = [
   'xlXq37Sp5po',
