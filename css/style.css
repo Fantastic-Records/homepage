@@ -616,20 +616,37 @@ main {
 
 }
 
-/* テーブルタグのスクロール */
-.table-wrap {
-	overflow-x: scroll;
+/*PC向け*/
+@media (min-width: 768px) {
+	.table {
+		width: 100%;
+		min-width: 500px;
+		border-collapse: collapse;
+	}
+	.table th,
+	.table td {
+		border: 2px solid #eee;
+		padding: 4px 8px;
+	}
 }
-.table {
-	width: 100%;
-	min-width: 500px;
-	border-collapse: collapse;
+
+/*スマホ向け*/
+@media (max-width: 767px) {
+	.table-wrap {
+		overflow-x: scroll;
+	}
+	.table {
+		width: 100%;
+		min-width: 500px;
+		border-collapse: collapse;
+	}
+	.table th,
+	.table td {
+		border: 2px solid #eee;
+		padding: 4px 8px;
+	}
 }
-.table th,
-.table td {
-	border: 2px solid #eee;
-	padding: 4px 8px;
-}
+
 
 /*infoエリアをはじめは非表示*/
 #info, #info2 {
