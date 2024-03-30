@@ -632,7 +632,7 @@ main {
 }
 
 /*infoエリアをはじめは非表示*/
-#info{
+#info, #info2 {
 	display: none;
 }
 
