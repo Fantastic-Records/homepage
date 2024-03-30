@@ -1,6 +1,3 @@
-const apiKey = process.env.YOUTUBE_API_KEY;
-const channelId = process.env.YOUTUBE_CHANNEL_ID;
-
 const manualVideoIds = [
   'xlXq37Sp5po',
   '9_-_PgOlNik',
@@ -12,12 +9,10 @@ const manualVideoIds = [
   'qPmRhcwoe-U',
 ];
 
-function displayThumbnails() {
+function displayThumbnails(apiKey, channelId) {
   const thumbnailContainer = document.getElementById('thumbnail-container');
 
-  const videoIds = manualVideoIds;
-
-  videoIds.forEach(videoId => {
+  manualVideoIds.forEach(videoId => {
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
 
     const thumbnailElement = document.createElement('img');
@@ -85,5 +80,18 @@ function openModal(videoId) {
 }
 
 window.addEventListener('load', () => {
-  displayThumbnails();
+  // サーバーから API キーとチャンネル ID を取得し、サムネイルを表示する
+  fetch('/api/config')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch API config');
+      }
+      return response.json();
+    })
+    .then(data => {
+      displayThumbnails(data.apiKey, data.channelId);
+    })
+    .catch(error => {
+      console.error('Error fetching API config:', error.message);
+    });
 });
