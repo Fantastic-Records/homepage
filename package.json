@@ -1,0 +1,12 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "Fantastic RecordsのホームページではTemplate Party様のテンプレートを使用して作成しています。\r また、サイトの表示速度高速化ため次世代画像フォーマットのWebpを使用しています。\r そして、サイトをインターネット上に公開するために「GitHub Pages」を使用しています。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
