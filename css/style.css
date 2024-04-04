@@ -649,7 +649,7 @@ main {
 
 
 /*infoエリアをはじめは非表示*/
-#info, #info2 {
+#info, #info2, #info3 {
 	display: none;
 }
 
