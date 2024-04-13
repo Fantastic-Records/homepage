@@ -1,5 +1,4 @@
-const apiKey = process.env.YOUTUBE_API_KEY;
-const channelId = process.env.YOUTUBE_CHANNEL_ID;
+import { apiKey, channelId } from './config.js';
 
 const manualVideoIds = [
   'xlXq37Sp5po',
@@ -32,43 +31,40 @@ function displayThumbnails() {
     thumbnailContainer.appendChild(thumbnailElement);
   });
 
-  // ブラウザ環境でのみ実行する部分
-  if (typeof window !== 'undefined') {
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=5&order=date&type=video&key=${apiKey}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`YouTube API request failed with status ${response.status}`);
+  fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=5&order=date&type=video&key=${apiKey}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`YouTube API request failed with status ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!data.items || data.items.length === 0) {
+        throw new Error('No videos found for the specified channel.');
+      }
+
+      const channelVideoIds = data.items.map(item => item.id.videoId);
+
+      channelVideoIds.forEach(videoId => {
+        if (!manualVideoIds.includes(videoId)) {
+          const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+
+          const thumbnailElement = document.createElement('img');
+          thumbnailElement.src = thumbnailUrl;
+          thumbnailElement.alt = `Thumbnail for video ${videoId}`;
+          thumbnailElement.className = 'thumbnail';
+
+          thumbnailElement.addEventListener('click', () => {
+            openModal(videoId);
+          });
+
+          thumbnailContainer.appendChild(thumbnailElement);
         }
-        return response.json();
-      })
-      .then(data => {
-        if (!data.items || data.items.length === 0) {
-          throw new Error('No videos found for the specified channel.');
-        }
-
-        const channelVideoIds = data.items.map(item => item.id.videoId);
-
-        channelVideoIds.forEach(videoId => {
-          if (!manualVideoIds.includes(videoId)) {
-            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
-
-            const thumbnailElement = document.createElement('img');
-            thumbnailElement.src = thumbnailUrl;
-            thumbnailElement.alt = `Thumbnail for video ${videoId}`;
-            thumbnailElement.className = 'thumbnail';
-
-            thumbnailElement.addEventListener('click', () => {
-              openModal(videoId);
-            });
-
-            thumbnailContainer.appendChild(thumbnailElement);
-          }
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching video information:', error.message);
       });
-  }
+    })
+    .catch(error => {
+      console.error('Error fetching video information:', error.message);
+    });
 }
 
 function openModal(videoId) {
@@ -87,9 +83,6 @@ function openModal(videoId) {
   });
 }
 
-// ブラウザ環境でのみ実行する部分
-if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    displayThumbnails();
-  });
-}
+window.addEventListener('load', () => {
+  displayThumbnails();
+});
