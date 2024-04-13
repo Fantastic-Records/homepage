@@ -31,7 +31,7 @@ function displayThumbnails() {
     thumbnailContainer.appendChild(thumbnailElement);
   });
 
-  fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=5&order=date&type=video&key=${apiKey}`)
+  fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&order=date&type=video&key=${apiKey}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`YouTube API request failed with status ${response.status}`);
