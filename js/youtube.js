@@ -1,5 +1,5 @@
-// 手動で指定した動画IDのリスト
 const manualVideoIds = [
+  'ZjzQLNQrI7o',
   'xlXq37Sp5po',
   '9_-_PgOlNik',
   '52ji1QIdC7c',
@@ -13,7 +13,6 @@ const manualVideoIds = [
 function displayThumbnails() {
   const thumbnailContainer = document.getElementById('thumbnail-container');
 
-  // APIから取得した動画IDと手動で指定した動画IDのリストを組み合わせて重複を削除する
   const allVideoIds = [...new Set([...manualVideoIds])]; 
 
   allVideoIds.forEach(videoId => {
@@ -29,6 +28,22 @@ function displayThumbnails() {
     });
 
     thumbnailContainer.appendChild(thumbnailElement);
+  });
+}
+
+function openModal(videoId) {
+  const videoContainerBackground = document.getElementById('video-container-background');
+  const videoPlayer = document.getElementById('video-player');
+
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+  videoPlayer.src = embedUrl;
+
+  videoContainerBackground.style.display = 'flex';
+
+  videoContainerBackground.addEventListener('click', () => {
+    videoContainerBackground.style.display = 'none';
+    videoPlayer.src = '';
   });
 }
 
