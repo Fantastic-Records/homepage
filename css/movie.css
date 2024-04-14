@@ -29,7 +29,7 @@
 
 #video-container {
   width: 90%;
-  max-width: 600px; 
+  max-width: 600px; /* 例として適切な横幅を設定 */
   height: 60%;
   z-index: 1000;
 }
