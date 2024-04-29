@@ -1,4 +1,5 @@
 const manualVideoIds = [
+  'xrFtHYujyKw',
   'ZjzQLNQrI7o',
   'xlXq37Sp5po',
   '9_-_PgOlNik',
